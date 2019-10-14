@@ -2,10 +2,16 @@
 #include "collision.h"
 #include "trianglesurface.h"
 
+/**
+ * @brief RollingStone::RollingStone constructor, creates a new collision system
+ */
 RollingStone::RollingStone() {
     collisionSystem = new Collision;
 }
 
+/**
+ * @brief RollingStone::update
+ */
 void RollingStone::update() {
     if (!currentTriangle.empty()) {
         auto [normal, distance] = collisionSystem->getBallNormal(currentTriangle, *this);
@@ -13,37 +19,18 @@ void RollingStone::update() {
     } else
         calculateVelocity(vec3(0), radius());
 }
+
 vec3 RollingStone::velocity() const {
     return mVelocity;
 }
+/**
+ * @brief RollingStone::calculateVelocity, calculates velocity of object
+ * @param normal
+ * @param distanceToTriangle
+ */
 void RollingStone::calculateVelocity(vec3 normal, double distanceToTriangle) {
-    //    if (distanceToTriangle > radius()) { // Not in contact with triangle, no directional force applied
-    //        normal = vec3(0);
-    //        qDebug() << "X-Acceleration = " << 0 << "Y-Acceleration = " << gravity.y;
-    //    } else {
-    // acos(normal.y) = 30 degrees in radians
-    // sin(30 degrees/0.5 rads) * gravity.y
-
-    //        qDebug() << force;
-    //        float distance = radius() - distanceToTriangle;
-    //        if (distance > 0.2f)
-    //            mTransMatrix.translate(normal * distance);
-    //    }
-    //    if (normal != lastNormal) {
-    //        if (normal == vec3(0)) {
-    //        } else if (lastNormal == vec3(0)) {
-    //            mVelocity = (gravity + N).normalized() * vec3::dot(velocity(), (gravity + N).normalized());
-    //        } else {
-    //            vec3 tempNormal = normal + lastNormal;
-    //            tempNormal.normalize();
-    //            vec3 tempVelocity = tempNormal * vec3::dot(velocity(), tempNormal);
-    //            tempVelocity = velocity() - tempVelocity * 2;
-    //            mVelocity = tempVelocity;
-    //        }
-    //    }
-    //    lastNormal = normal;
-
     vec3 newPos = getPosition();
+    // bevegelsesligning hentet fra .pdf
     newPos += (velocity() * deltaTime) + (mAcceleration * 0.5 * pow(deltaTime, 2));
     move(newPos);
 
@@ -57,7 +44,6 @@ void RollingStone::calculateVelocity(vec3 normal, double distanceToTriangle) {
         force.y = Ay;
         force.z = Az;
     }
-    //    qDebug() << force;
 
     vec3 newAcceleration = force / mMass;
     vec3 deltaV = (mAcceleration + newAcceleration) * (0.5 * deltaTime);
