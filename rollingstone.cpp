@@ -18,6 +18,7 @@ void RollingStone::update() {
         calculateVelocity(normal, distance);
     } else
         calculateVelocity(vec3(0), radius());
+
 }
 
 vec3 RollingStone::velocity() const {
