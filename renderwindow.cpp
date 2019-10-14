@@ -150,26 +150,6 @@ void RenderWindow::init() {
     //    mPlayer->rotate(gsl::Vector3D(90, 0, 0));
     //    mVisualObjects.push_back(mPlayer);
 
-    //    // Creating the NPC
-    //    mNPC = new TriangleSurface();
-    //    mNPC->readFile(cylinder);
-    //    mNPC->scale(gsl::Vector3D(0.5, 0.5, 2));
-    //    mNPC->rotate(gsl::Vector3D(90, 0, 0));
-    //    mVisualObjects.push_back(mNPC);
-    //    // Bezier Curve
-    //    gsl::Vector3D point1{-2.5, 0, -2}, point2{1, 0, -0.5}, point3{-1.5, 0, 1}, point4{1.5, 0, 2.5};
-    //    std::vector<gsl::Vector3D> controlPoints{point1, point2, point3, point4};
-    //    BezierCurve *curve = new BezierCurve(controlPoints, 3);
-    //    bezierPoints = curve->getPoints();
-    //    mVisualObjects.push_back(curve);
-    //    // Creating the popler trees
-    //    Tree *mTree1 = new Tree();
-    //    mTree1->move(gsl::Vector3D(1, 0, -.5));
-    //    mVisualObjects.push_back(mTree1);
-    //    Tree *mTree2 = new Tree();
-    //    mTree2->move(gsl::Vector3D(-1.5, 0, 1));
-    //    mVisualObjects.push_back(mTree2);
-
     //********************** Set up camera **********************
     mCurrentCamera = new Camera();
     mCurrentCamera->setPosition(gsl::Vector3D(-2.f, -7.5f, 10.f));
@@ -217,41 +197,41 @@ void RenderWindow::render() {
                 baryc = collisionSystem->barycentricCoordinates(pawn->getPosition(), triPoints[i], triPoints[i + 1], triPoints[i + 2]);
                 if (gsl::within(baryc.x) && gsl::within(baryc.y) && (baryc.x + baryc.y) <= 1) {
                     pawn->currentTriangle = std::vector<vec3>{triPoints[i], triPoints[i + 1], triPoints[i + 2]};
-                    foundTriangle = true;
-                    break;
-                }
-            }
-            if (foundTriangle)
+                foundTriangle = true;
                 break;
+            }
         }
-        if (!foundTriangle) {
-            pawn->currentTriangle.clear();
-        }
+        if (foundTriangle)
+            break;
     }
-    pawn->update();
-    //    if (!playerCaught)
-    //    {
-    //        consumeMovementInput(0.016f);
-    //        if (detectPlayer())
-    //        {
-    //            chasePlayer();
-    //        }
-    //        else
-    //            moveAlongLine(0.016f);
-    //    }
+    if (!foundTriangle) {
+        pawn->currentTriangle.clear();
+    }
+}
+pawn->update();
+//    if (!playerCaught)
+//    {
+//        consumeMovementInput(0.016f);
+//        if (detectPlayer())
+//        {
+//            chasePlayer();
+//        }
+//        else
+//            moveAlongLine(0.016f);
+//    }
 
-    //Calculate framerate before
-    // checkForGLerrors() because that takes a long time
-    // and before swapBuffers(), else it will show the vsync time
-    calculateFramerate();
+//Calculate framerate before
+// checkForGLerrors() because that takes a long time
+// and before swapBuffers(), else it will show the vsync time
+calculateFramerate();
 
-    //using our expanded OpenGL debugger to check if everything is OK.
-    checkForGLerrors();
+//using our expanded OpenGL debugger to check if everything is OK.
+checkForGLerrors();
 
-    //Qt require us to call this swapBuffers() -function.
-    // swapInterval is 1 by default which means that swapBuffers() will (hopefully) block
-    // and wait for vsync.
-    mContext->swapBuffers(this);
+//Qt require us to call this swapBuffers() -function.
+// swapInterval is 1 by default which means that swapBuffers() will (hopefully) block
+// and wait for vsync.
+mContext->swapBuffers(this);
 }
 
 void RenderWindow::setupPlainShader(int shaderIndex) {
