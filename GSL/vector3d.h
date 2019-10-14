@@ -70,7 +70,7 @@ public:
         return out;
     } //    QVector3D getQVector() const;   //for use with qDebug()
     friend std::istream &operator>>(std::istream &is, gsl::Vector3D &v) {
-        char temp, temp2, temp3, temp4;
+       // char temp, temp2, temp3, temp4;
         is >> v.x >> v.z >> v.y;
         return is;
     }

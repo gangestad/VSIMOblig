@@ -10,7 +10,7 @@ Collision::Collision() {
  * @param pointA Point A of the triangle
  * @param pointB Point B of the triangle
  * @param pointC Point C of the triangle
- * @return
+ * @return barycentric coordinates
  */
 vec3 Collision::barycentricCoordinates(const vec3 &point, const vec3 &pointA, const vec3 &pointB, const vec3 &pointC) {
     vec3 v0 = pointB - pointA;
@@ -27,12 +27,12 @@ vec3 Collision::barycentricCoordinates(const vec3 &point, const vec3 &pointA, co
     baryc.x = (v1Sqr * v2Dotv0 - v0Dotv1 * v2Dotv1) / denom;
     baryc.y = (v0Sqr * v2Dotv1 - v0Dotv1 * v2Dotv0) / denom;
     baryc.setZ(1.0f - baryc.x - baryc.y);
-    //    qDebug() << baryc.x << baryc.y << baryc.z;
+
     return baryc;
 }
 std::tuple<vec3, double> Collision::getBallNormal(std::vector<vec3> triangle, RollingStone &ball) {
     // Make the plane containing this triangle
-    PLANE trianglePlane(triangle[0], triangle[1], triangle[2]);
+    Plane trianglePlane(triangle[0], triangle[1], triangle[2]);
     double signedDistToTrianglePlane = std::fabs(trianglePlane.signedDistanceTo(ball.getPosition() - vec3(0.2f, 0.2f, 0.2f)));
     // Is triangle front-facing to the velocity vector?
     // We only check front-facing triangles
