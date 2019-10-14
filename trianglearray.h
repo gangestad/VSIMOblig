@@ -16,6 +16,7 @@ struct Triangle {
         : vert{p1, p2, p3} {
         calcNormal();
     }
+
     void operator()(Vertex a, Vertex b, Vertex c) {
         vert[0] = a;
         vert[1] = b;
@@ -26,11 +27,13 @@ struct Triangle {
     bool operator==(const Triangle &tri) {
         return vert[0] == tri.vert[0] && vert[1] == tri.vert[1] && vert[2] == tri.vert[2];
     }
+
     void calcNormal() {
         vec3 edge1 = vert[1].XYZ() - vert[0].XYZ();
         vec3 edge2 = vert[2].XYZ() - vert[0].XYZ();
         normal = (edge1 ^ edge2).normalized();
     }
+
     bool hasVertex(const Vertex &vertex) {
         vec3 vertCoords[3]{vert[0].XYZ(), vert[1].XYZ(), vert[2].XYZ()};
         vec3 vertexCoords = vertex.XYZ();
