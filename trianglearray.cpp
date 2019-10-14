@@ -62,9 +62,9 @@ void TriangleArray::push_back(std::vector<Vertex> vertices, std::vector<unsigned
 }
 void TriangleArray::checkForDuplicates(Triangle triangle) {
     tempIndex.resize(3);
-    duplicate(triangle.vert[0], 0);
-    duplicate(triangle.vert[1], 1);
-    duplicate(triangle.vert[2], 2);
+    isDuplicate(triangle.vert[0], 0);
+    isDuplicate(triangle.vert[1], 1);
+    isDuplicate(triangle.vert[2], 2);
 
     for (unsigned int i = 0; i < tempIndex.size(); i++) {
         mIndices.push_back(tempIndex.at(i));
@@ -78,7 +78,7 @@ void TriangleArray::checkForDuplicates(Triangle triangle) {
  * just makes it easier to keep track of what part of tempIndex I'm changing
  * @return
  */
-bool TriangleArray::duplicate(Vertex vert, int index) {
+bool TriangleArray::isDuplicate(Vertex vert, int index) {
     if (mVertices.size() != 0) {
         for (unsigned int i = 0; i < mVertices.size(); i++) // for each vertex
         {

@@ -94,7 +94,7 @@ private:
     bool mIsWeighted{false};
     bool calculated{false};
 
-    bool duplicate(Vertex vert, int index);
+    bool isDuplicate(Vertex vert, int index);
     void checkForDuplicates(Triangle vertices);
     float angleBetweenSurfaceNormals(const Triangle &tri1, const Triangle &tri2);
 };
