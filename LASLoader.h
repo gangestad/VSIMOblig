@@ -135,15 +135,15 @@ public:
         {
             switch (format)
             {
-                case 0:
+            case 0:
                 return 20;
-                case 1:
+            case 1:
                 return 28;
-                case 2:
+            case 2:
                 return 26;
-                case 3:
+            case 3:
                 return 34;
-                default:
+            default:
                 return 0;
             }
         }
@@ -177,15 +177,15 @@ public:
                 return;
 
             double normalizedX = unformattedX * loader->header.xScaleFactor + loader->header.xbyteOffset;
-                   normalizedX = (normalizedX - loader->header.minUnformattedX)/(loader->header.maxUnformattedX - loader->header.minUnformattedX);
+            normalizedX = (normalizedX - loader->header.minUnformattedX)/(loader->header.maxUnformattedX - loader->header.minUnformattedX);
             _xNormalized = normalizedX;
         }
         void setYNormalized(LASLoader* loader)
         {
             if (loader == nullptr)
                 return;
-             double normalizedY = unformattedY * loader->header.yScaleFactor + loader->header.ybyteOffset;
-              normalizedY = (normalizedY - loader->header.minUnformattedY)/(loader->header.maxUnformattedY - loader->header.minUnformattedY);
+            double normalizedY = unformattedY * loader->header.yScaleFactor + loader->header.ybyteOffset;
+            normalizedY = (normalizedY - loader->header.minUnformattedY)/(loader->header.maxUnformattedY - loader->header.minUnformattedY);
             _yNormalized = normalizedY;
         }
         //Normalized: point - min / max - min
@@ -193,9 +193,9 @@ public:
         {
             if (loader == nullptr)
                 return;
-           double normalizedZ = unformattedZ * loader->header.zScaleFactor + loader->header.zbyteOffset;
-           normalizedZ = (normalizedZ - loader->header.minUnformattedZ)/(loader->header.maxUnformattedZ - loader->header.minUnformattedZ);
-           _zNormalized = normalizedZ;
+            double normalizedZ = unformattedZ * loader->header.zScaleFactor + loader->header.zbyteOffset;
+            normalizedZ = (normalizedZ - loader->header.minUnformattedZ)/(loader->header.maxUnformattedZ - loader->header.minUnformattedZ);
+            _zNormalized = normalizedZ;
         }
 
     private:
@@ -299,13 +299,13 @@ public:
         PointIterator operator+ (unsigned int offset) const
         {
             return PointIterator{loaderRef, data.getFormat(), (pointIndex + offset < pointAmount) ? pointIndex + offset : pointAmount};
-        }
+            }
 
-        PointIterator operator- (unsigned int offset) const
-        {
+            PointIterator operator- (unsigned int offset) const
+            {
             return PointIterator{loaderRef, data.getFormat(), (pointIndex < offset) ? 0 : pointIndex - offset};
-        }
-    };
+    }
+};
 
     PointIterator begin()
     {
@@ -318,7 +318,7 @@ public:
         return PointIterator{*this, (fileOpened) ? header.pointDataRecordFormat : std::numeric_limits<unsigned char>::max(), pointCount()};
     }
 
-// Extra loader data
+    // Extra loader data
 private:
     bool usingCreationDay = false;
     bool usingCreationYear = false;
@@ -479,16 +479,16 @@ public:
     //The points are to big for use in OpenGL, need to normalize
     static std::array<double,3> normalizePoints (double &x, double &y, double &z)
     {
-            double l = length(x,y,z);
+        double l = length(x,y,z);
 
-            if (l > 0)
-            {
-                x = x / l;
-                y = y / l;
-                z = z / l;
-            }
+        if (l > 0)
+        {
+            x = x / l;
+            y = y / l;
+            z = z / l;
+        }
 
-            return std::array<double,3>{x,y,z};
+        return std::array<double,3>{x,y,z};
     }
     // File with full path
     // Stack overflow!

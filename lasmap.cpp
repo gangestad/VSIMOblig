@@ -62,7 +62,7 @@ void LasMap::init() {
     glBufferData(GL_ARRAY_BUFFER, mVertices.size() * sizeof(Vertex), mVertices.data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ARRAY_BUFFER, mVBO);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)nullptr);
     glEnableVertexAttribArray(0);
 
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)(3 * sizeof(GLfloat)));
@@ -122,9 +122,9 @@ void LasMap::normalizePoints() {
     zMax = zValues[zValues.size() - 1];
 
     for (auto &point : points) {
-        point.x = ((point.x - xMin) / (xMax - xMin) - 0.5) * scaleFactor;
-        point.y = ((point.y - yMin) / (yMax - yMin) - 0.5) * scaleFactor;
-        point.z = ((point.z - zMin) / (zMax - zMin) - 0.5) * scaleFactor;
+        point.x = ((point.x - xMin) / (xMax - xMin) - 0.5f) * scaleFactor;
+        point.y = ((point.y - yMin) / (yMax - yMin) - 0.5f) * scaleFactor;
+        point.z = ((point.z - zMin) / (zMax - zMin) - 0.5f) * scaleFactor;
 
         //        point.x += 2;
         //        point.y += 1;

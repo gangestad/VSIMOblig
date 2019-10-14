@@ -9,7 +9,7 @@ BezierCurve::BezierCurve(std::vector<vec3> controlPoints, int degree) : b{contro
     //        mVertices.push_back({point.getX(), point.getY(), point.getZ(), 1.f, 0.f, 0.f});
     //        control.push_back(getModelMatrix() * point);
     //    }
-    for (double t{1.f}, step{0.05}; t > 0.f; t -= step)
+    for (double t{1.f}, step{0.05}; (float)t > 0.f; t -= step)
     {
         vec3 point = Bezier(t, degree);
         mVertices.push_back({point.getX(), point.getY(), point.getZ(), 1.f, 0.f, 0.f});

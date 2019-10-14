@@ -23,6 +23,7 @@ void RollingStone::update() {
 vec3 RollingStone::velocity() const {
     return mVelocity;
 }
+
 /**
  * @brief RollingStone::calculateVelocity, calculates velocity of object
  * @param normal
