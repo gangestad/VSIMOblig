@@ -30,10 +30,11 @@ vec3 RollingStone::velocity() const {
  */
 void RollingStone::calculateVelocity(vec3 normal, double distanceToTriangle) {
     vec3 newPos = getPosition();
-    // bevegelsesligning hentet fra .pdf
+    // Bevegelsesligning hentet fra .pdf
     newPos += (velocity() * deltaTime) + (mAcceleration * 0.5 * pow(deltaTime, 2));
     move(newPos);
 
+    // Newton's 2nd law
     vec3 force = gravity * mMass;
 
     if (distanceToTriangle <= radius()) {

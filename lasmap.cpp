@@ -33,11 +33,11 @@ LasMap::LasMap() {
     //    mVertices.push_back(v);
 
     //printSomePoints();
-    readFile("../VSIMOblig/LASdata/fuck.txt");
-    readFile("../VSIMOblig/LASdata/fuck2.txt");
-    readFile("../VSIMOblig/LASdata/fuck3.txt");
-    readFile("../VSIMOblig/LASdata/fuck4.txt");
-    readFile("../VSIMOblig/LASdata/fuck5.txt");
+    readFile("../VSIMOblig/LASdata/data.txt");
+    readFile("../VSIMOblig/LASdata/data2.txt");
+    readFile("../VSIMOblig/LASdata/data3.txt");
+    readFile("../VSIMOblig/LASdata/data4.txt");
+    readFile("../VSIMOblig/LASdata/data5.txt");
     //    readFile("../VSIMOblig/LASdata/33-1-497-327-20.txt");
     normalizePoints();
     addAllPointsToVertices();
