@@ -6,16 +6,28 @@
 TriangleArray::TriangleArray() {
 }
 
-// Backwards compatibility to glDrawArrays
+/**
+ * @brief TriangleArray::TriangleArray, enables backwards compatibility to glDrawArrays
+ * @param vertices
+ */
 TriangleArray::TriangleArray(Triangle vertices) {
     this->push_back(vertices);
 }
-// Backwards compatibility to glDrawArrays
+
+/**
+ * @brief TriangleArray::TriangleArray, backwards compatibility to glDrawArrays
+ * @param triangles
+ */
 TriangleArray::TriangleArray(std::vector<Triangle> triangles) {
     for (Triangle tri : triangles) {
         this->push_back(tri);
     }
 }
+
+/**
+ * @brief TriangleArray::TriangleArray, backwards compatibility to glDrawArrays
+ * @param vertices
+ */
 TriangleArray::TriangleArray(std::vector<Vertex> vertices) {
     if (vertices.size() % 3 != 0) {
         throw std::out_of_range("Vertex vector is not a multiple of three, something went wrong (Not enough vertices to make sufficient triangles.");
@@ -26,11 +38,21 @@ TriangleArray::TriangleArray(std::vector<Vertex> vertices) {
         }
     }
 }
+/**
+ * @brief TriangleArray::TriangleArray, backwards compatibility to glDrawArrays
+ * @param vertices
+ * @param indices
+ */
 TriangleArray::TriangleArray(std::vector<Vertex> vertices, std::vector<unsigned int> indices) {
     this->push_back(vertices, indices);
 }
+
+/**
+ * @brief TriangleArray::~TriangleArray deconstructor
+ */
 TriangleArray::~TriangleArray() {
 }
+
 /**
  * @brief TriangleArray::push_back Add another triangle to the array.
  * Backwards compatibility function, if you already have indices then pass them in as well
@@ -41,6 +63,7 @@ void TriangleArray::push_back(Triangle triangle) {
     checkForDuplicates(triangle);
     // Should probably just change function to take tuple
 }
+
 void TriangleArray::push_back(std::vector<Vertex> vertices) {
     for (unsigned int i = 0; i < vertices.size() - 1; i += 3) {
         Triangle tri(vertices.at(i), vertices.at(i + 1), vertices.at(i + 2));
@@ -48,6 +71,7 @@ void TriangleArray::push_back(std::vector<Vertex> vertices) {
         checkForDuplicates(tri);
     }
 }
+
 void TriangleArray::push_back(std::vector<Vertex> vertices, std::vector<unsigned int> indices) {
     // separate into triangles and check if vertices have dupes
     // if they do, swap the index of that vertex with the other index.
@@ -60,6 +84,7 @@ void TriangleArray::push_back(std::vector<Vertex> vertices, std::vector<unsigned
     if (indices.size() % 3 != 0)
         throw std::out_of_range("3 indices required per triangle!");
 }
+
 void TriangleArray::checkForDuplicates(Triangle triangle) {
     tempIndex.resize(3);
     isDuplicate(triangle.vert[0], 0);
@@ -135,6 +160,7 @@ void TriangleArray::setVertices(const std::vector<Vertex> &vertices) {
 void TriangleArray::setIndices(const std::vector<unsigned int> &indices) {
     mIndices = indices;
 }
+
 /**
  * @brief TriangleArray::at
  * @param index
@@ -148,6 +174,7 @@ std::vector<vec3> TriangleArray::at(unsigned int index) const {
     triangleVector.push_back(mTriangles.at(index).vert[2].XYZ());
     return triangleVector;
 }
+
 /**
  * @brief TriangleArray::atW
  * @param index
