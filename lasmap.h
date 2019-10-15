@@ -3,8 +3,9 @@
 
 #include "LASLoader.h"
 #include "visualobject.h"
+#include "trianglesurface.h"
 
-class LasMap : public VisualObject {
+class LasMap : public TriangleSurface {
 public:
     LasMap();
     ~LasMap() override;
