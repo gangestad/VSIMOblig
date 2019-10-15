@@ -30,6 +30,7 @@ vec3 RollingStone::velocity() const {
  * @param distanceToTriangle
  */
 void RollingStone::calculateVelocity(vec3 normal, double distanceToTriangle) {
+    vec3 N = normal * vec3::dot(-gravity, normal);
     vec3 newPos = getPosition();
     // Bevegelsesligning hentet fra .pdf
     newPos += (velocity() * deltaTime) + (mAcceleration * 0.5 * pow(deltaTime, 2));
@@ -39,12 +40,8 @@ void RollingStone::calculateVelocity(vec3 normal, double distanceToTriangle) {
     vec3 force = gravity * mMass;
 
     if (distanceToTriangle <= radius()) {
-        float Ax = -gravity.y * normal.y;
-        float Ay = gravity.y * acos(normal.y);
-        float Az = -gravity.y * normal.z;
-        force.x = Ax;
-        force.y = Ay;
-        force.z = Az;
+        force = N + gravity;
+        qDebug() << force;
     }
 
     vec3 newAcceleration = force / mMass;
