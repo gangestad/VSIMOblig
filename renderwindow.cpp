@@ -36,6 +36,7 @@ RenderWindow::RenderWindow(const QSurfaceFormat &format, MainWindow *mainWindow)
 
     //Make the gameloop timer:
     mRenderTimer = new QTimer(this);
+    collisionSystem = new Collision;
 }
 
 RenderWindow::~RenderWindow() {
@@ -86,7 +87,6 @@ void RenderWindow::init() {
 
     setupPlainShader(0);
     setupTextureShader(1);
-    collisionSystem = new Collision;
 
     //**********************  Texture stuff: **********************
     //    mTexture[0] = new Texture();
@@ -103,30 +103,17 @@ void RenderWindow::init() {
 
     TriangleSurface *mSurface = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
     mSurface->move(vec3(-2, 3, -2));
-    mSurface->rotate(vec3(0, 0, 10));
+    mSurface->rotate(vec3(0, 0, 30));
     mSurface->scale(5);
     mVisualObjects.push_back(mSurface);
     TriangleSurface *mSurface2 = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
-    mSurface2->move(vec3(5, -4, -2));
+    mSurface2->move(vec3(6.5, -4, -2));
     mSurface2->scale(5);
     mVisualObjects.push_back(mSurface2);
 
     pawn = new RollingStone;
     mVisualObjects.push_back(pawn);
-    pawn->move(vec3(1.2, 4.7, 1));
-    //    TriangleSurface *mSurface = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
-    //    mSurface->move(vec3(-2, 3, -2));
-    //    mSurface->rotate(vec3(0, 0, 30));
-    //    mSurface->scale(5);
-    //    mVisualObjects.push_back(mSurface);
-    //    TriangleSurface *mSurface2 = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
-    //    mSurface2->move(vec3(6.5, -4, -2));
-    //    mSurface2->scale(5);
-    //    mVisualObjects.push_back(mSurface2);
-
-    //    pawn = new RollingStone;
-    //    mVisualObjects.push_back(pawn);
-    //    pawn->move(vec3(1.2, 5.5, 1));
+    pawn->move(vec3(1.2, 5.5, 1));
 
     //    gsl::LASLoader *mTestMap = new gsl::LASLoader("../VSIMOblig/LASdata/33-1-497-327-20.las"); ////Get LASLoader to read correct constructor
     ////    mTestMap->readFile("../VSIMOblig/LASdata/33-1-497-327-20.las");
@@ -134,8 +121,10 @@ void RenderWindow::init() {
     //    mVisualObjects.push_back(mTestMap);
 
     //    LasMap *mTestMap = new LasMap();
-    //mTestMap->scale(10);
+    //    //mTestMap->scale(10);
+
     //    mVisualObjects.push_back(mTestMap);
+
     //    mSurface->createSurface();
     //    mSurface->move(gsl::Vector3D(-3, 0, -3));
     //    mSurface->scale(gsl::Vector3D(3, 1, 3));
@@ -152,7 +141,7 @@ void RenderWindow::init() {
 
     //********************** Set up camera **********************
     mCurrentCamera = new Camera();
-    mCurrentCamera->setPosition(gsl::Vector3D(-2.f, -7.5f, 10.f));
+    mCurrentCamera->setPosition(gsl::Vector3D(-2.f, -5.5f, 10.f));
     mCurrentCamera->yaw(-1.6);
     mCurrentCamera->pitch(-30.6);
     for (VisualObject *object : mVisualObjects) {
@@ -197,41 +186,41 @@ void RenderWindow::render() {
                 baryc = collisionSystem->barycentricCoordinates(pawn->getPosition(), triPoints[i], triPoints[i + 1], triPoints[i + 2]);
                 if (gsl::within(baryc.x) && gsl::within(baryc.y) && (baryc.x + baryc.y) <= 1) {
                     pawn->currentTriangle = std::vector<vec3>{triPoints[i], triPoints[i + 1], triPoints[i + 2]};
-                foundTriangle = true;
-                break;
+                    foundTriangle = true;
+                    break;
+                }
             }
+            if (foundTriangle)
+                break;
         }
-        if (foundTriangle)
-            break;
+        if (!foundTriangle) {
+            pawn->currentTriangle.clear();
+        }
     }
-    if (!foundTriangle) {
-        pawn->currentTriangle.clear();
-    }
-}
-pawn->update();
-//    if (!playerCaught)
-//    {
-//        consumeMovementInput(0.016f);
-//        if (detectPlayer())
-//        {
-//            chasePlayer();
-//        }
-//        else
-//            moveAlongLine(0.016f);
-//    }
+    pawn->update();
+    //    if (!playerCaught)
+    //    {
+    //        consumeMovementInput(0.016f);
+    //        if (detectPlayer())
+    //        {
+    //            chasePlayer();
+    //        }
+    //        else
+    //            moveAlongLine(0.016f);
+    //    }
 
-//Calculate framerate before
-// checkForGLerrors() because that takes a long time
-// and before swapBuffers(), else it will show the vsync time
-calculateFramerate();
+    //Calculate framerate before
+    // checkForGLerrors() because that takes a long time
+    // and before swapBuffers(), else it will show the vsync time
+    calculateFramerate();
 
-//using our expanded OpenGL debugger to check if everything is OK.
-checkForGLerrors();
+    //using our expanded OpenGL debugger to check if everything is OK.
+    checkForGLerrors();
 
-//Qt require us to call this swapBuffers() -function.
-// swapInterval is 1 by default which means that swapBuffers() will (hopefully) block
-// and wait for vsync.
-mContext->swapBuffers(this);
+    //Qt require us to call this swapBuffers() -function.
+    // swapInterval is 1 by default which means that swapBuffers() will (hopefully) block
+    // and wait for vsync.
+    mContext->swapBuffers(this);
 }
 
 void RenderWindow::setupPlainShader(int shaderIndex) {

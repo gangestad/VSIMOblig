@@ -20,9 +20,7 @@ GLfloat rad2degf(GLfloat rad) {
 GLfloat deg2radf(GLfloat deg) {
     return deg * (PI / 180.0f);
 }
-bool within(double x) {
-    return (x >= 0) && (x <= 1);
-}
+
 //Calculates the points on a bezier curve. Input t from 0 to 1
 Vector3D bezierCurve(std::vector<Vector3D> points, GLfloat t, unsigned long long degree) {
     for (unsigned long long k = 0; k < degree; k++) {
@@ -34,6 +32,7 @@ Vector3D bezierCurve(std::vector<Vector3D> points, GLfloat t, unsigned long long
     return points[0];
 }
 
+//Calculates the points on a basis spline curve. Input t from 0 to 1.
 Vector3D bSpline(const std::vector<Vector3D> &points, const std::vector<GLfloat> &t, GLfloat x, unsigned long long degree) {
     //CALCULATE VALID KNOT INTERVAL 'MY'
     unsigned long long my;
@@ -74,6 +73,7 @@ Vector3D bSpline(const std::vector<Vector3D> &points, const std::vector<GLfloat>
 
     return result;
 }
+
 Vector3D up() {
     return Vector3D{0.f, 1.f, 0.f};
 }
@@ -131,7 +131,9 @@ float distanceToPlane(const Vector3D &point, const Vector3D &normal, const Vecto
 
     return distance;
 }
-
+bool within(double x) {
+    return (x >= 0) && (x <= 1);
+}
 bool withinPlane(const Vector3D &point, Matrix4x4 &modelMatrix, Vector2D upright, Vector2D downleft) {
     Matrix4x4 inversed = modelMatrix;
     inversed.inverse();
@@ -154,16 +156,4 @@ bool withinPlane(const Vector3D &point, Matrix4x4 &modelMatrix, Vector2D upright
     else
         return false;
 }
-
-GLdouble newtons2Law(GLdouble landMass, GLdouble ballMass, GLdouble distance) {
-    double m1 = landMass;
-    double m2 = ballMass;
-    double r2 = distance;
-    double G = 6.6742E-11;
-
-    double Force = (G * m1 * m2) / (r2 * r2);
-
-    return Force;
-}
-
 } // namespace gsl

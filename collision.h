@@ -8,8 +8,8 @@ class RollingStone;
 class Collision {
 public:
     Collision();
-    std::tuple<vec3, double> getBallNormal(std::vector<vec3> triangle, RollingStone &ball);
     vec3 barycentricCoordinates(const vec3 &point, const vec3 &pointA, const vec3 &pointB, const vec3 &pointC);
+    std::pair<vec3, double> getBallNormal(std::vector<vec3> triangle, RollingStone &ball);
 };
 
 #endif // COLLISION_H

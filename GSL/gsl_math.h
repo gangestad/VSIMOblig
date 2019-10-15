@@ -8,6 +8,7 @@
 #include "vector3d.h"
 #include "vector4d.h"
 #include <vector>
+
 namespace gsl {
 //Functions
 GLdouble rad2deg(GLdouble rad);
@@ -15,7 +16,6 @@ GLdouble deg2rad(GLdouble deg);
 GLfloat rad2degf(GLfloat rad);
 GLfloat deg2radf(GLfloat deg);
 GLfloat clamp(GLfloat x, GLfloat min, GLfloat max);
-GLdouble newtons2Law(GLdouble landMass, GLdouble ballMass, GLdouble distance);
 
 //Interpolation
 //Remember time can only be between 0 and 1
