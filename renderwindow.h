@@ -43,6 +43,7 @@ private slots:
 private:
     // Player variables
     RollingStone *pawn;
+    Collision *collisionSystem;
     float mPlayerSpeed{3.f};
     gsl::Vector3D mDesiredVelocity{0, 0, 0};
     void calculateKeyInputs();
