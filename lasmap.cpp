@@ -35,9 +35,6 @@ LasMap::LasMap() {
     //printSomePoints();
 
     readFile("../VSIMOblig/LASdata/fjell.txt");
-
-    //    readFile("../VSIMOblig/LASdata/33-1-497-327-20.txt");
-
     normalizePoints();
     addAllPointsToVertices();
     constructSurface(10, 10);

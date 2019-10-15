@@ -101,17 +101,17 @@ void RenderWindow::init() {
     VisualObject *temp = new XYZ();
     mVisualObjects.push_back(temp);
 
-    TriangleSurface *mSurface = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
-    mSurface->move(vec3(-2, 3, -2));
-    mSurface->rotate(vec3(0, 0, 30));
-    mSurface->scale(5);
-    mVisualObjects.push_back(mSurface);
+   // TriangleSurface *mSurface = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
+   // mSurface->move(vec3(-2, 3, -2));
+   // mSurface->rotate(vec3(0, 0, 30));
+   // mSurface->scale(5);
+   // mVisualObjects.push_back(mSurface);
 
-    TriangleSurface *mSurface2 = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
-    mSurface2->move(vec3(6.5, -5, -2));
-    mSurface2->rotate(vec3(0, 0, 30));
-    mSurface2->scale(5);
-    mVisualObjects.push_back(mSurface2);
+    //TriangleSurface *mSurface2 = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
+    //mSurface2->move(vec3(6.5, -5, -2));
+    //mSurface2->rotate(vec3(0, 0, 30));
+    //mSurface2->scale(5);
+    //mVisualObjects.push_back(mSurface2);
 
     //TriangleSurface *mSurface3 = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
     //mSurface3->move(vec3(14.5, -10, -2));
@@ -123,8 +123,8 @@ void RenderWindow::init() {
     mVisualObjects.push_back(pawn);
     pawn->move(vec3(1.2, 5.5, 1));
 
-    //LasMap *mMap = new LasMap();
-    //mVisualObjects.push_back(mMap);
+    LasMap *mMap = new LasMap();
+    mVisualObjects.push_back(mMap);
 
 
     //********************** Set up camera **********************

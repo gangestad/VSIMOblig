@@ -35,12 +35,6 @@ std::pair<vec3, double> Collision::getBallNormal(std::vector<vec3> triangle, Rol
     // Make the plane containing this triangle
     Plane trianglePlane(triangle[0], triangle[1], triangle[2]);
     double signedDistToTrianglePlane = std::fabs(trianglePlane.signedDistanceTo(ball.getPosition() - vec3(0.2f, 0.2f, 0.2f)));
-    // Is triangle front-facing to the velocity vector?
-    // We only check front-facing triangles
-    //    if (trianglePlane.isFrontFacingTo(ball.velocity().normalized())) {
-    //        // Calculate the signed distance from sphere position to triangle plane
-    //    }
-
     vec3 normal{0};
     normal = vec3::cross(triangle[2] - triangle[0], triangle[1] - triangle[0]);
     normal.normalize();
