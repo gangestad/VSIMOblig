@@ -34,11 +34,8 @@ LasMap::LasMap() {
 
     //printSomePoints();
 
-    readFile("../VSIMOblig/LASdata/data.txt");
-    readFile("../VSIMOblig/LASdata/data2.txt");
-    readFile("../VSIMOblig/LASdata/data3.txt");
-    readFile("../VSIMOblig/LASdata/data4.txt");
-    readFile("../VSIMOblig/LASdata/data5.txt");
+    readFile("../VSIMOblig/LASdata/fjell.txt");
+
     //    readFile("../VSIMOblig/LASdata/33-1-497-327-20.txt");
 
     normalizePoints();

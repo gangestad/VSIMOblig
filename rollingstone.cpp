@@ -14,7 +14,7 @@ RollingStone::RollingStone() {
  */
 void RollingStone::update() {
     if (!currentTriangle.empty()) {
-        auto [normal, distance] = collisionSystem->getBallNormal(currentTriangle, *this);
+        auto [normal, distance] = collisionSystem->getBallNormal(currentTriangle, *this); // c++17
         calculateVelocity(normal, distance);
     } else
         calculateVelocity(vec3(0), radius());
@@ -41,7 +41,6 @@ void RollingStone::calculateVelocity(vec3 normal, double distanceToTriangle) {
 
     if (distanceToTriangle <= radius()) {
         force = N + gravity;
-        qDebug() << force;
     }
 
     vec3 newAcceleration = force / mMass;

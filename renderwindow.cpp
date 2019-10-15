@@ -115,15 +115,11 @@ void RenderWindow::init() {
     mVisualObjects.push_back(pawn);
     pawn->move(vec3(1.2, 5.5, 1));
 
-    //    gsl::LASLoader *mTestMap = new gsl::LASLoader("../VSIMOblig/LASdata/33-1-497-327-20.las"); ////Get LASLoader to read correct constructor
-    ////    mTestMap->readFile("../VSIMOblig/LASdata/33-1-497-327-20.las");
-    ////    mTestMap->scale(0.001f);
-    //    mVisualObjects.push_back(mTestMap);
-
-    //    LasMap *mTestMap = new LasMap();
+    LasMap *mTestMap = new LasMap();
     //    //mTestMap->scale(10);
 
-    //    mVisualObjects.push_back(mTestMap);
+    mVisualObjects.push_back(mTestMap);
+    mTestMap->move(vec3(0, -5, 0));
 
     //    mSurface->createSurface();
     //    mSurface->move(gsl::Vector3D(-3, 0, -3));
@@ -178,6 +174,7 @@ void RenderWindow::render() {
         object->draw();
     }
     vec3 baryc;
+    // Check each triangle for the correct barycentric coordinates
     for (VisualObject *obj : mVisualObjects) {
         bool foundTriangle{false};
         if (TriangleSurface *triangle = dynamic_cast<TriangleSurface *>(obj)) {
