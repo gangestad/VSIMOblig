@@ -10,7 +10,7 @@ public:
 
     void update();
     vec3 velocity() const;
-    std::vector<vec3> currentTriangle;
+    std::vector<vec3> currentTriangle{};
 
 private:
     vec3 mVelocity{0};

@@ -18,7 +18,6 @@ void RollingStone::update() {
         calculateVelocity(normal, distance);
     } else
         calculateVelocity(vec3(0), radius());
-
 }
 
 vec3 RollingStone::velocity() const {
@@ -42,7 +41,7 @@ void RollingStone::calculateVelocity(vec3 normal, double distanceToTriangle) {
     if (distanceToTriangle <= radius()) {
         float Ax = -gravity.y * normal.y;
         float Ay = gravity.y * acos(normal.y);
-        float Az = -gravity.y * normal.y;
+        float Az = -gravity.y * normal.z;
         force.x = Ax;
         force.y = Ay;
         force.z = Az;
