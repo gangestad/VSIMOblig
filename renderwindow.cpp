@@ -6,6 +6,7 @@
 #include "mainwindow.h"
 #include "matrix4x4.h"
 #include "rollingstone.h"
+#include "npc.h"
 //#include "LASLoader.h"
 #include "shader.h"
 #include "tree.h"
@@ -209,6 +210,22 @@ checkForGLerrors();
 // swapInterval is 1 by default which means that swapBuffers() will (hopefully) block
 // and wait for vsync.
 mContext->swapBuffers(this);
+
+// FINITE STATE MACHINE
+switch (npcStates) {
+case PATROL:
+        npcAI->patrol();
+        break;
+case CHASE:
+        npcAI->chase();
+        break;
+case LEARN:
+        npcAI->learn();
+        break;
+case SLEEP:
+        break;
+}
+
 }
 
 void RenderWindow::setupPlainShader(int shaderIndex) {

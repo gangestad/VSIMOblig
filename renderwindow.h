@@ -6,6 +6,7 @@
 #include "matrix4x4.h"
 #include "texture.h"
 #include "visualobject.h"
+#include "npc.h"
 #include <QElapsedTimer>
 #include <QOpenGLFunctions_4_1_Core>
 #include <QTimer>
@@ -49,6 +50,10 @@ private:
     void calculateKeyInputs();
     bool playerCaught{false};
     std::vector<gsl::Vector3D> mSurfacePoints;
+
+    // FSM
+    NPCstates npcStates;
+    NPC *npcAI;
 
     TriangleSurface *mNPC;
     float mNPCSpeed{1.5};

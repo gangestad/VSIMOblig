@@ -11,7 +11,7 @@ class BSplineCurve
 public:
 
     // default constructor
-    BSplineCurve() {}
+    BSplineCurve();
     BSplineCurve(std::vector<float> knots, std::vector<vec3> controlpoints, int degree = 2) : b(controlpoints), d(degree), t(knots) {
         n = knots.size();
     }
