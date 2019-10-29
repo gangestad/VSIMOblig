@@ -18,6 +18,7 @@ SOURCES += main.cpp \
     GSL/vector3d.cpp \
     GSL/vector4d.cpp \
     GSL/gsl_math.cpp \
+    bsplinecurve.cpp \
     collision.cpp \
     lasmap.cpp \
     renderwindow.cpp \
@@ -47,6 +48,7 @@ HEADERS += \
     GSL/gsl_math.h \
     GSL/math_constants.h \
     LASLoader.h \
+    bsplinecurve.h \
     collision.h \
     lasmap.h \
     renderwindow.h \
