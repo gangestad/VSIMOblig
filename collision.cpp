@@ -31,9 +31,16 @@ vec3 Collision::barycentricCoordinates(const vec3 &point, const vec3 &pointA, co
     return baryc;
 }
 
+/**
+ * @brief Collision::getBallNormal
+ * @param triangle
+ * @param ball
+ * @return a pair containing the normal and distance from ball to plane
+ */
 std::pair<vec3, double> Collision::getBallNormal(std::vector<vec3> triangle, RollingStone &ball) {
     // Make the plane containing this triangle
     Plane trianglePlane(triangle[0], triangle[1], triangle[2]);
+    // Distance from ball to plane (stackoverflow)
     double signedDistToTrianglePlane = std::fabs(trianglePlane.signedDistanceTo(ball.getPosition() - vec3(0.2f, 0.2f, 0.2f)));
     vec3 normal{0};
     normal = vec3::cross(triangle[2] - triangle[0], triangle[1] - triangle[0]);

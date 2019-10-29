@@ -1,5 +1,5 @@
 #include "npc.h"
-#include "bsplinecurve.h"
+
 
 NPC::NPC()
 {
@@ -7,6 +7,16 @@ NPC::NPC()
 }
 
 void NPC::patrol()
+{
+
+}
+
+void NPC::chase()
+{
+
+}
+
+void NPC::learn()
 {
 
 }

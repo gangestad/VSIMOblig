@@ -17,6 +17,7 @@ public:
     }
     void initVertexBufferObjects();
     void draw(GLint positionAttribute, GLint colorAttriute, GLint textureAttribute=-1);
+    // deBoor's algorithm
     vec3 evaluateBSpline(int my, float x);
     int findKnotInterval(float x);
     vec3 evaluateBSpline(int degree, int startKnot, float x);

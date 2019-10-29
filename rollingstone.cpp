@@ -11,6 +11,8 @@ RollingStone::RollingStone() {
 
 /**
  * @brief RollingStone::update
+ * if we are on a triangle, calculate our normal and current distance to triangle
+ * calculate the velocity
  */
 void RollingStone::update() {
     if (!currentTriangle.empty()) {
@@ -20,6 +22,10 @@ void RollingStone::update() {
         calculateVelocity(vec3(0), radius());
 }
 
+/**
+* @brief RollingStone::velocity
+* @return velocity
+*/
 vec3 RollingStone::velocity() const {
     return mVelocity;
 }
@@ -39,12 +45,15 @@ void RollingStone::calculateVelocity(vec3 normal, double distanceToTriangle) {
     // Newton's 2nd law
     vec3 force = gravity * mMass;
 
+    // Liten og dårlig kollisjonssjekk
     if (distanceToTriangle <= radius()) {
         force = N + gravity;
         qDebug() << force;
     }
 
+    // ny akselerasjon
     vec3 newAcceleration = force / mMass;
+    // (initiell akselerasjon + ny akselerasjon) * 1/2t
     vec3 deltaV = (mAcceleration + newAcceleration) * (0.5 * deltaTime);
     deltaV = deltaV * 100;
     mVelocity = deltaV;

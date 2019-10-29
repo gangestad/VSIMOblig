@@ -102,11 +102,11 @@ void RenderWindow::init() {
     VisualObject *temp = new XYZ();
     mVisualObjects.push_back(temp);
 
-   // TriangleSurface *mSurface = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
-   // mSurface->move(vec3(-2, 3, -2));
-   // mSurface->rotate(vec3(0, 0, 30));
-   // mSurface->scale(5);
-   // mVisualObjects.push_back(mSurface);
+    //TriangleSurface *mSurface = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
+    //mSurface->move(vec3(-2, 3, -2));
+    //mSurface->rotate(vec3(0, 0, 30));
+    //mSurface->scale(5);
+    //mVisualObjects.push_back(mSurface);
 
     //TriangleSurface *mSurface2 = new TriangleSurface("../VSIMOblig/Assets/triangles.txt");
     //mSurface2->move(vec3(6.5, -5, -2));

@@ -37,7 +37,7 @@ public:
 
     vec2 deBoor(float x);
 private:
-    BSplineCurve& bSplineCurve;
+  //  BSplineCurve& bSplineCurve;
     vec3 player;
 
     // FSM PART
