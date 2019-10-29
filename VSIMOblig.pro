@@ -21,6 +21,7 @@ SOURCES += main.cpp \
     bsplinecurve.cpp \
     collision.cpp \
     lasmap.cpp \
+    npc.cpp \
     renderwindow.cpp \
     rollingstone.cpp \
     shader.cpp \
@@ -51,6 +52,7 @@ HEADERS += \
     bsplinecurve.h \
     collision.h \
     lasmap.h \
+    npc.h \
     renderwindow.h \
     rollingstone.h \
     shader.h \
