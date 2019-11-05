@@ -2,7 +2,6 @@
 #define LASMAP_H
 
 #include "LASLoader.h"
-#include "visualobject.h"
 #include "trianglesurface.h"
 
 class LasMap : public TriangleSurface {
@@ -24,7 +23,7 @@ public:
 
     void constructSurface(unsigned int xGridSize, unsigned int zGridSize);
     void readFile();
-    void readFile(std::string filename);
+    void readFile(std::string filename) override;
     std::vector<gsl::Vector3D> points;
     std::vector<gsl::Vector3D> planePoints;
     //"../VSIMOblig/LASdata/33-1-497-327-20.las"

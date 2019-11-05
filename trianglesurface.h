@@ -3,8 +3,7 @@
 
 #include "visualobject.h"
 
-class TriangleSurface : public VisualObject
-{
+class TriangleSurface : public VisualObject {
 public:
     TriangleSurface();
     TriangleSurface(std::string filename);
@@ -13,7 +12,7 @@ public:
     virtual void init() override;
     virtual void draw() override;
 
-    void readFile(std::string filename);
+    virtual void readFile(std::string filename);
     void writeFile(std::string filename);
     void construct();
     void createSurface();

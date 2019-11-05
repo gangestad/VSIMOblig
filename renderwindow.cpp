@@ -124,9 +124,11 @@ void RenderWindow::init() {
     mVisualObjects.push_back(pawn);
     pawn->move(vec3(1.2, 5.5, 1));
 
-    LasMap *mMap = new LasMap();
-    mVisualObjects.push_back(mMap);
+    LasMap *mTestMap = new LasMap();
+    //    //mTestMap->scale(10);
 
+    mVisualObjects.push_back(mTestMap);
+    mTestMap->move(vec3(0, -5, 0));
 
     //********************** Set up camera **********************
     mCurrentCamera = new Camera();
@@ -167,6 +169,7 @@ void RenderWindow::render() {
         object->draw();
     }
     vec3 baryc;
+    // Check each triangle for the correct barycentric coordinates
     for (VisualObject *obj : mVisualObjects) {
         bool foundTriangle{false};
         if (TriangleSurface *triangle = dynamic_cast<TriangleSurface *>(obj)) {
